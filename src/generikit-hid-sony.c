@@ -105,6 +105,93 @@ static const char ghl_ps4_magic_data[] = {
 	0x30, 0x02, 0x08, 0x0A, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
+/* DDRPad Controller */
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6,12,0))
+  static const
+#else
+  static
+#endif
+u8 ddrpad_rdesc[] = {
+	0x05, 0x01,         /*  Usage Page (Desktop),               */
+	0x09, 0x04,         /*  Usage (Joystick),                   */
+	0xA1, 0x01,         /*  Collection (Application),           */
+	0x06, 0x00, 0xFF,   /*          Usage Page (FF00h),         */
+	0x75, 0x01,			/*			Report Size (1),			*/
+	0x95, 0x10,			/*			Report Count (16),			*/
+	0x81, 0x03,			/*		Input (Constant),				*/	
+	0x75, 0x01,			/*			Report Size (1),			*/
+	0x95, 0x06,			/*			Report Count (6),			*/
+	0x15, 0x00, 		/*			Logical Minimum (0), 		*/
+	0x25, 0x01,			/*			Logical Maximum (1),		*/
+	0x35, 0x00,			/*			Physical Minimum (0),		*/
+	0x45, 0x01,			/*			Physical Maximum (1),		*/
+	0x05, 0x09,			/*			Usage Page (Button), 		*/
+	0x19, 0x01,			/*			Usage Minimum (1),			*/
+	0x29, 0x06,			/*			Usage Maximum (6),			*/
+	0x81, 0x02,			/*		Input (Variable),				*/
+	0x06, 0x00, 0xFF,   /*          Usage Page (FF00h),         */
+	0x75, 0x01,			/*			Report Size (1),			*/
+	0x95, 0x10,			/*			Report Count (16),			*/
+	0x81, 0x03,			/*		Input (Constant),				*/
+	0x75, 0x01,			/*			Report Size (1),			*/
+	0x95, 0x01,			/*			Report Count (1),			*/
+	0x15, 0x00, 		/*			Logical Minimum (0), 		*/
+	0x25, 0x01,			/*			Logical Maximum (1),		*/
+	0x35, 0x00,			/*			Physical Minimum (0),		*/
+	0x45, 0x01,			/*			Physical Maximum (1),		*/
+	0x05, 0x09,			/*			Usage Page (Button), 		*/
+	0x19, 0x07,			/*			Usage Minimum (7),			*/
+	0x29, 0x07,			/*			Usage Maximum (7),			*/
+	0x81, 0x02,			/*		Input (Variable),				*/
+	0x06, 0x00, 0xFF,   /*          Usage Page (FF00h),         */
+	0x75, 0x01,			/*			Report Size (1),			*/
+	0x95, 0x07,			/*			Report Count (7),			*/
+	0x81, 0x03,			/*		Input (Constant),				*/	
+	0x75, 0x01,			/*			Report Size (1),			*/
+	0x95, 0x01,			/*			Report Count (1),			*/
+	0x15, 0x00, 		/*			Logical Minimum (0), 		*/
+	0x25, 0x01,			/*			Logical Maximum (1),		*/
+	0x35, 0x00,			/*			Physical Minimum (0),		*/
+	0x45, 0x01,			/*			Physical Maximum (1),		*/
+	0x05, 0x09,			/*			Usage Page (Button), 		*/
+	0x19, 0x08,			/*			Usage Minimum (8),			*/
+	0x29, 0x08,			/*			Usage Maximum (8),			*/
+	0x81, 0x02,			/*		Input (Variable),				*/
+	0x06, 0x00, 0xFF,   /*          Usage Page (FF00h),         */
+	0x75, 0x01,			/*			Report Size (1),			*/
+	0x95, 0x07,			/*			Report Count (7),			*/
+	0x81, 0x03,			/*		Input (Constant),				*/
+	0x75, 0x01,			/*			Report Size (1),			*/
+	0x95, 0x01,			/*			Report Count (1),			*/
+	0x15, 0x00, 		/*			Logical Minimum (0), 		*/
+	0x25, 0x01,			/*			Logical Maximum (1),		*/
+	0x35, 0x00,			/*			Physical Minimum (0),		*/
+	0x45, 0x01,			/*			Physical Maximum (1),		*/
+	0x05, 0x09,			/*			Usage Page (Button), 		*/
+	0x19, 0x09,			/*			Usage Minimum (9),			*/
+	0x29, 0x09,			/*			Usage Maximum (9),			*/
+	0x81, 0x02,			/*		Input (Variable),				*/
+	0x06, 0x00, 0xFF,   /*          Usage Page (FF00h),         */
+	0x75, 0x01,			/*			Report Size (1),			*/
+	0x95, 0x07,			/*			Report Count (7),			*/
+	0x81, 0x03,			/*		Input (Constant),				*/
+	0x75, 0x01,			/*			Report Size (1),			*/
+	0x95, 0x01,			/*			Report Count (1),			*/
+	0x15, 0x00, 		/*			Logical Minimum (0), 		*/
+	0x25, 0x01,			/*			Logical Maximum (1),		*/
+	0x35, 0x00,			/*			Physical Minimum (0),		*/
+	0x45, 0x01,			/*			Physical Maximum (1),		*/
+	0x05, 0x09,			/*			Usage Page (Button), 		*/
+	0x19, 0x0a,			/*			Usage Minimum (10),			*/
+	0x29, 0x0a,			/*			Usage Maximum (10),			*/
+	0x81, 0x02,			/*		Input (Variable),				*/
+	0x06, 0x00, 0xFF,   /*          Usage Page (FF00h),         */
+	0x75, 0x01,			/*			Report Size (1),			*/
+	0x95, 0x07,			/*			Report Count (7),			*/
+	0x81, 0x03,			/*		Input (Constant),				*/
+	0xC0                /*  End Collection                      */
+};
+
 /* PS/3 Motion controller */
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(6,12,0))
   static const
@@ -435,6 +522,19 @@ static const unsigned int sixaxis_keymap[] = {
 	[0x11] = BTN_MODE, /* PS */
 };
 
+static const unsigned int ddrpad_keymap[] = {
+	[0x01] = BTN_DPAD_UP,
+	[0x02] = BTN_DPAD_DOWN,
+	[0x03] = BTN_DPAD_LEFT,
+	[0x04] = BTN_DPAD_RIGHT,
+	[0x05] = BTN_START,
+	[0x06] = BTN_SELECT,
+	[0x07] = BTN_NORTH,
+	[0x08] = BTN_EAST,
+	[0x09] = BTN_SOUTH,
+	[0x0a] = BTN_WEST,
+};
+
 static enum power_supply_property sony_battery_props[] = {
 	POWER_SUPPLY_PROP_PRESENT,
 	POWER_SUPPLY_PROP_CAPACITY,
@@ -621,6 +721,18 @@ static int guitar_mapping(struct hid_device *hdev, struct hid_input *hi,
 #else
   static
 #endif
+u8 *ddrpad_fixup(struct hid_device *hdev, u8 *rdesc,
+			      unsigned int *rsize)
+{
+	*rsize = sizeof(ddrpad_rdesc);
+	return ddrpad_rdesc;
+}
+
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6,12,0))
+  static const
+#else
+  static
+#endif
 u8 *motion_fixup(struct hid_device *hdev, u8 *rdesc,
 			      unsigned int *rsize)
 {
@@ -729,41 +841,8 @@ static int sixaxis_mapping(struct hid_device *hdev, struct hid_input *hi,
 	if ((usage->hid & HID_USAGE_PAGE) == HID_UP_BUTTON) {
 		unsigned int key = usage->hid & HID_USAGE;
 
-		if (key >= ARRAY_SIZE(sixaxis_keymap))
-			return -1;
-
-		key = sixaxis_keymap[key];
+		key = ddrpad_keymap[key];
 		hid_map_usage_clear(hi, usage, bit, max, EV_KEY, key);
-		return 1;
-	} else if (usage->hid == HID_GD_POINTER) {
-		/* The DS3 provides analog values for most buttons and even
-		 * for HAT axes through GD Pointer. L2 and R2 are reported
-		 * among these as well instead of as GD Z / RZ. Remap L2
-		 * and R2 and ignore other analog 'button axes' as there is
-		 * no good way for reporting them.
-		 */
-		switch (usage->usage_index) {
-		case 8: /* L2 */
-			usage->hid = HID_GD_Z;
-			break;
-		case 9: /* R2 */
-			usage->hid = HID_GD_RZ;
-			break;
-		default:
-			return -1;
-		}
-
-		hid_map_usage_clear(hi, usage, bit, max, EV_ABS, usage->hid & 0xf);
-		return 1;
-	} else if ((usage->hid & HID_USAGE_PAGE) == HID_UP_GENDESK) {
-		unsigned int abs = usage->hid & HID_USAGE;
-
-		if (abs >= ARRAY_SIZE(sixaxis_absmap))
-			return -1;
-
-		abs = sixaxis_absmap[abs];
-
-		hid_map_usage_clear(hi, usage, bit, max, EV_ABS, abs);
 		return 1;
 	}
 
@@ -804,6 +883,8 @@ u8 *sony_report_fixup(struct hid_device *hdev, u8 *rdesc,
 
 	if (sc->quirks & PS3REMOTE)
 		return ps3remote_fixup(hdev, rdesc, rsize);
+	
+	return ddrpad_fixup(hdev, rdesc, rsize);
 
 	/*
 	 * Some knock-off USB dongles incorrectly report their button count
