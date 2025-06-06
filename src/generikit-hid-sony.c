@@ -529,10 +529,10 @@ static const unsigned int ddrpad_keymap[] = {
 	[0x04] = BTN_DPAD_RIGHT,
 	[0x05] = BTN_START,
 	[0x06] = BTN_SELECT,
-	[0x07] = BTN_NORTH,
+	[0x07] = BTN_SOUTH,
 	[0x08] = BTN_EAST,
-	[0x09] = BTN_SOUTH,
-	[0x0a] = BTN_WEST,
+	[0x09] = BTN_WEST,
+	[0x0a] = BTN_NORTH,
 };
 
 static enum power_supply_property sony_battery_props[] = {
