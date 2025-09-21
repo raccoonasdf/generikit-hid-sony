@@ -19,10 +19,18 @@ CONFIG_MODULE_SIG   := n
 
 # Kernel variables
 
+
+ifndef KVER
+	KVER := $(shell uname -r)
+endif
+
+ifndef KSRC
+	KSRC := /lib/modules/$(KVER)/build
+endif
+
 MODULE_NAME     := generikit-hid-sony
-KERNEL_VERSION  := $(shell uname -r)
-KERNEL_PATH     := /lib/modules/$(KERNEL_VERSION)
-KERNEL_BUILD    := $(KERNEL_PATH)/build
+KERNEL_VERSION  := $(KVER)
+KERNEL_BUILD    := $(KSRC)
 BUILD_DIRECTORY := $(shell pwd)
 obj-m           := src/$(MODULE_NAME).o
 
